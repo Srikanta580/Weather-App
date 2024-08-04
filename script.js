@@ -10,15 +10,21 @@ async function checkWeather(city){
     const response =await fetch(apiUrl + city + `&appid=${apiKey}`);
 
     if(response.status==404 || response.status==400){
-        document.querySelector(".invalid").style.display="block";
-        document.querySelector(".weather").style.display="none";
-
+        
+        weatherIcon.src = "images/not-found.png"
+        document.querySelector(".temp").innerHTML="City"
+        document.querySelector(".city").innerHTML="Not found"
+        document.querySelector(".temp").style.fontSize = "30px";
+        document.querySelector(".city").style.fontSize = "30px";
+        document.querySelector(".city").style.paddingTop = "15px";
+        document.querySelector(".humidity").innerHTML= "N/A";
+        document.querySelector(".wind").innerHTML= "N/A"
     }
     else{
         var data= await response.json();
 
 
-        
+
         document.querySelector(".city").innerHTML= data.name;
         document.querySelector(".temp").innerHTML= Math.round(data.main.temp) +"°C";
         document.querySelector(".humidity").innerHTML= data.main.humidity + " %";
@@ -42,12 +48,11 @@ async function checkWeather(city){
         else if(data.weather[0].main== "Snow"){
             weatherIcon.src = "images/snow.png"
         }
-        document.querySelector(".weather").style.display="block";
-        document.querySelector(".invalid").style.display="none";
+
 }
     }
 
-       
+
 
 searchBtn.addEventListener("click", ()=>{
     checkWeather(searchBox.value);
@@ -63,3 +68,6 @@ textInput.addEventListener('keydown', (event) => {
     
   }
 });
+
+const defaultCity = "kolkata";
+checkWeather(defaultCity);

@@ -97,9 +97,9 @@ body{
     font-size: 28px;
     margin-top: 0px;
 }
-.weather{
+/* .weather{
     display: none;
-}
+} */
 .invalid{
     text-align: left;
     margin: 3px 6px;
